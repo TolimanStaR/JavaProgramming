@@ -158,7 +158,7 @@ public class Complex {
     public void visualizeAtComplexPlane() {
         StringBuilder result = new StringBuilder();
         for (int i = 19; i > -1; --i) {
-            result.append(String.format("%.2f", (double) i / 10 * real) + "  |");
+            result.append(String.format("%.2f", (double) i / 10 * real)).append("  |");
             for (int j = 0; j < 40; ++j) {
                 double curI = (double) i / 20 * real;
                 double curJ = (double) j / 40 * real;
@@ -173,11 +173,11 @@ public class Complex {
             result.append("\n");
         }
         result.append("      |" + "________________________________________\n           ");
-        result.append(String.format("%.2f", (double) real * 0.2) + "    ");
-        result.append(String.format("%.2f", (double) real * 0.4) + "    ");
-        result.append(String.format("%.2f", (double) real * 0.6) + "    ");
-        result.append(String.format("%.2f", (double) real * 0.8) + "    ");
-        result.append(String.format("%.2f", (double) real * 1) + "    ");
+        result.append(String.format("%.2f", (double) real * 0.2)).append("    ");
+        result.append(String.format("%.2f", (double) real * 0.4)).append("    ");
+        result.append(String.format("%.2f", (double) real * 0.6)).append("    ");
+        result.append(String.format("%.2f", (double) real * 0.8)).append("    ");
+        result.append(String.format("%.2f", (double) real * 1)).append("    ");
         System.out.print(result);
     }
 }
