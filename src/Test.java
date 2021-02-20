@@ -52,4 +52,21 @@ public class Test {
         a.pow(3);
         t.assertTrue(a.getReal() == -543266);
     }
+
+    public static void test6() {
+        Test t = new Test();
+        t.testNumber = 6;
+        double[][] a = {{2, 0}, {0, 3}};
+        Matrix x = new Matrix(a);
+        t.assertTrue(x.det() == 6);
+    }
+
+    public static void test7() {
+        Test t = new Test();
+        t.testNumber = 7;
+        double[][] a = {{1, 0}, {0, 1}};
+        Matrix x = new Matrix(a);
+        Matrix y = x.inverse();
+        t.assertTrue(x.det() == y.det());
+    }
 }

@@ -157,6 +157,8 @@ public class Complex {
 
     public void visualizeAtComplexPlane() {
         StringBuilder result = new StringBuilder();
+        result.append("      IM\n");
+        result.append("      ^\n");
         for (int i = 19; i > -1; --i) {
             result.append(String.format("%.2f", (double) i / 10 * real)).append("  |");
             for (int j = 0; j < 40; ++j) {
@@ -168,16 +170,15 @@ public class Complex {
                 } else {
                     result.append(" ");
                 }
-
             }
             result.append("\n");
         }
-        result.append("      |" + "________________________________________\n           ");
+        result.append("      |" + "________________________________________-> RE\n           ");
         result.append(String.format("%.2f", (double) real * 0.2)).append("    ");
         result.append(String.format("%.2f", (double) real * 0.4)).append("    ");
         result.append(String.format("%.2f", (double) real * 0.6)).append("    ");
         result.append(String.format("%.2f", (double) real * 0.8)).append("    ");
-        result.append(String.format("%.2f", (double) real * 1)).append("    ");
+        result.append(String.format("%.2f", (double) real * 1)).append("    \n");
         System.out.print(result);
     }
 }
