@@ -50,7 +50,7 @@ public class Test {
         t.testNumber = 5;
         Complex a = new Complex(61, -7);
         a.pow(3);
-        t.assertTrue(a.getReal() == -543266);
+        t.assertTrue(a.abs() == 543339.9983849891);
     }
 
     public static void test6() {
