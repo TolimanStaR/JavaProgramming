@@ -16,9 +16,13 @@ public class Main {
 //        Test.test7();
 //        ;
 
-        FileHandler f = new FileHandler("HardAsARock.txt");
+        System.out.print("Enter a file name\n>>> ");
+        Scanner input = new Scanner(System.in);
+        String fileName = input.nextLine();
+        FileHandler f = new FileHandler(fileName);
         f.getDataFromFile();
-        System.out.print(f);
-
+        f.getData();
+        f.getResult();
+        f.saveData();
     }
 }

@@ -1,0 +1,39 @@
+Symbol: A - 1 times
+Symbol: B - 1 times
+Symbol: E - 1 times
+Symbol: G - 1 times
+Symbol: H - 19 times
+Symbol: I - 10 times
+Symbol: 
+ - 45 times
+Symbol: N - 2 times
+Symbol: P - 1 times
+Symbol: R - 1 times
+Symbol: S - 4 times
+Symbol: T - 1 times
+Symbol: W - 7 times
+Symbol: Y - 3 times
+Symbol:   - 164 times
+Symbol: a - 104 times
+Symbol: b - 4 times
+Symbol: c - 32 times
+Symbol: d - 43 times
+Symbol: e - 58 times
+Symbol: ' - 25 times
+Symbol: g - 11 times
+Symbol: h - 42 times
+Symbol: i - 34 times
+Symbol: k - 33 times
+Symbol: l - 30 times
+Symbol: , - 5 times
+Symbol: m - 11 times
+Symbol: n - 41 times
+Symbol: o - 59 times
+Symbol: p - 6 times
+Symbol: r - 91 times
+Symbol: s - 35 times
+Symbol: t - 48 times
+Symbol: u - 16 times
+Symbol: v - 5 times
+Symbol: w - 1 times
+Symbol: y - 9 times
