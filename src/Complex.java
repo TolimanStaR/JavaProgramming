@@ -113,7 +113,7 @@ public class Complex {
         for (int i = 0; i < power; i += 2) {
             newReal += evenImgOnePower(i) * Math.pow(real, power - 1) * Math.pow(img, i) * combinations(power, i);
         }
-        for (int i = 1; i < power; ++i) {
+        for (int i = 1; i < power; i+=2) {
             newImg += evenImgOnePower(i - 1) * Math.pow(real, i) * Math.pow(img, power - i) * combinations(power, i);
         }
         real = newReal;
@@ -126,7 +126,7 @@ public class Complex {
         for (int i = 0; i < power; i += 2) {
             real += evenImgOnePower(i) * Math.pow(number.real, power - 1) * Math.pow(number.img, i) * combinations(power, i);
         }
-        for (int i = 1; i < power; ++i) {
+        for (int i = 1; i < power; i+=2) {
             img += evenImgOnePower(i - 1) * Math.pow(number.real, i) * Math.pow(number.img, power - i) * combinations(power, i);
         }
         return new Complex(real, img);
