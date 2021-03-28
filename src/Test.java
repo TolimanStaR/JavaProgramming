@@ -69,4 +69,25 @@ public class Test {
         Matrix y = x.inverse();
         t.assertTrue(x.det() == y.det());
     }
+
+    public static void test8() {
+        Test t = new Test();
+        t.testNumber = 8;
+        NameRecognizer r = new NameRecognizer("Дыряев Даниил Александрович", "03.04.2001");
+        t.assertTrue(r.GetAge() == 19); // Не будет проходить после 3 апреля, потому что мне будет уже 20 лет
+    }
+
+    public static void test9() {
+        Test t = new Test();
+        t.testNumber = 9;
+        NameRecognizer r = new NameRecognizer("Дыряев Даниил Александрович", "03.04.2001");
+        t.assertTrue(r.getSex().equals("Male"));
+    }
+
+    public static void test10() {
+        Test t = new Test();
+        t.testNumber = 10;
+        NameRecognizer r = new NameRecognizer("Дыряев Даниил Александрович", "03.04.2001");
+        t.assertTrue(r.getInitials().equals("Д. Д. А. "));
+    }
 }
