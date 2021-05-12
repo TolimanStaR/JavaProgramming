@@ -150,7 +150,7 @@ public class Lift extends Thread {
                                     passengers.add(curEvent.getPassengerId());
                                     if (destFloor > curFloor) {
                                         direction = curDirrection.UP;
-                                    } else {
+                                    } else if (destFloor < curFloor) {
                                         direction = curDirrection.DOWN;
                                     }
                                     System.out.println("Лифт " + getLiftId() + " прибыл на этаж " + getCurFloor() +
@@ -171,6 +171,14 @@ public class Lift extends Thread {
 
     public Event getEventFromQueue() {
         return events.poll();
+    }
+
+    public int getEventsCount() {
+        int res = events.size();
+        if (curEvent != null) {
+            res++;
+        }
+        return res;
     }
 
     public void addEvent(Event event) {

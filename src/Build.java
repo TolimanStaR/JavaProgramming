@@ -10,7 +10,7 @@ public class Build {
     Build(ArrayList<Floor> floorsList, ArrayList<Lift> liftsList, int buildHeight, int liftsCount1) {
         floors = floorsList;
         lifts = liftsList;
-        buildHeight = height;
+        height = buildHeight;
         liftsCount = liftsCount1;
     }
 
