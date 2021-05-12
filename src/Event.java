@@ -18,10 +18,10 @@ public class Event {
         this.destFloor = destFloor;
     }
 
-    Event(int type1, int floor1, int passengerId1) {
-        type = type1;
-        fromFloor = floor1;
-        passengerId = passengerId1;
+    Event(int pasId, int from, int to) {
+        passengerId = pasId;
+        fromFloor = from;
+        destFloor = to;
     }
 
     public int getType() {

@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import javax.crypto.ExemptionMechanism;
 import java.util.*;
 
@@ -7,6 +9,8 @@ public class Lift extends Thread {
     private int curFloor;
     private int destFloor;
 
+    private int id;
+
     public int getDestFloor() {
         return destFloor;
     }
@@ -15,12 +19,12 @@ public class Lift extends Thread {
         this.destFloor = destFloor;
     }
 
-    public void setPassengers(Set<Integer> passengers) {
+    public void setPassengers(HashSet<Integer> passengers) {
         this.passengers = passengers;
     }
 
-    private Set<Integer> passengers;
-    private Queue<Event> events;
+    private HashSet<Integer> passengers;
+    private ArrayDeque<Event> events;
     private Build build;
 
     public Set<Integer> getPassengers() {
@@ -51,6 +55,8 @@ public class Lift extends Thread {
         curFloor = curFloor1;
         build = b;
         direction = curDirrection.STOP;
+        events = new ArrayDeque<>();
+        passengers = new HashSet<>();
     }
 
     public Build getBuild() {
@@ -91,63 +97,74 @@ public class Lift extends Thread {
         mFinish = true;
     }
 
+    public int getLiftId() {
+        return (int) this.getId();
+    }
+
     @Override
     public void run() {
         while (true) {
             try {
-                try {
-                    if (!mFinish) {
-                        // here are actual code:
-                        if (events.isEmpty()) {
-                            direction = curDirrection.STOP;
-                        } else {
-                            if (direction == curDirrection.STOP) {
-                                // Now lift has no current events
-                                // We start execute new event
-                                Event event = getEventFromQueue();
-                                curEvent = event;
-                                destFloor = event.getFromFloor();
-                                if (destFloor > curFloor) {
-                                    direction = curDirrection.UP;
-                                } else {
-                                    direction = curDirrection.DOWN;
-                                }
+                if (!mFinish) {
+                    // here are actual code:
+                    if (events.isEmpty() && direction == curDirrection.STOP) {
+                        System.out.println("Лифт " + getLiftId() + " стоит на этаже " +
+                                getCurFloor() + " потому что текущих вызовов нет");
+                    } else {
+                        if (direction == curDirrection.STOP) {
+                            // Now lift has no current events
+                            // We start execute new event
+                            Event event = getEventFromQueue();
+                            curEvent = event;
+                            destFloor = event.getFromFloor();
+                            System.out.println("Лифт " + getLiftId() + " взял на себя доставку пассажира " +
+                                    curEvent.getPassengerId() + " с этажа " + curEvent.getFromFloor() +
+                                    " на этаж " + curEvent.getDestFloor());
+                            if (destFloor > curFloor) {
+                                direction = curDirrection.UP;
                             } else {
-                                // Now lift executes current event
-                                if (direction == curDirrection.UP) {
-                                    curFloor++;
-                                } else if (direction == curDirrection.DOWN) {
-                                    curFloor--;
-                                }
-                                if (curFloor == destFloor) {
-                                    if (passengers.contains(curEvent.getPassengerId())) {
-                                        // it means that now we put passenger into his destination floor
-                                        passengers.remove(curEvent.getPassengerId());
-                                        direction = curDirrection.STOP;
-                                        curEvent = null;
+                                direction = curDirrection.DOWN;
+                            }
+                        } else {
+                            // Now lift executes current event
+                            System.out.print("Лифт " + getLiftId() + " двигается ");
+                            if (direction == curDirrection.UP) {
+                                curFloor++;
+                                System.out.print("наверх ");
+                            } else if (direction == curDirrection.DOWN) {
+                                curFloor--;
+                                System.out.print("вниз ");
+                            }
+                            System.out.println("и находится на этаже " + getCurFloor());
+                            if (curFloor == destFloor) {
+                                if (passengers.contains(curEvent.getPassengerId())) {
+                                    // it means that now we put passenger into his destination floor
+                                    passengers.remove(curEvent.getPassengerId());
+                                    direction = curDirrection.STOP;
+                                    System.out.println("Лифт " + getLiftId() + " доставил пассажира " +
+                                            curEvent.getPassengerId() + " на этаж " + getCurFloor());
+                                    curEvent = null;
+                                } else {
+                                    // we just arrive to take the passenger who calls the lift
+                                    destFloor = curEvent.getDestFloor();
+                                    passengers.add(curEvent.getPassengerId());
+                                    if (destFloor > curFloor) {
+                                        direction = curDirrection.UP;
                                     } else {
-                                        // we just arrive to take the passenger who calls the lift
-                                        destFloor = curEvent.getDestFloor();
-                                        passengers.add(curEvent.getPassengerId());
-                                        if (destFloor > curFloor) {
-                                            direction = curDirrection.UP;
-                                        } else {
-                                            direction = curDirrection.DOWN;
-                                        }
+                                        direction = curDirrection.DOWN;
                                     }
+                                    System.out.println("Лифт " + getLiftId() + " прибыл на этаж " + getCurFloor() +
+                                            " чтобы забрать пассажира " + curEvent.getPassengerId());
                                 }
                             }
                         }
-                        Thread.sleep(1000);
-                    } else {
-                        return;
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.sleep(1000);
+                } else {
+                    return;
                 }
-            } catch (Exception ignored) {
-                System.out.println("Thread has stopped!");
-                return;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -157,7 +174,7 @@ public class Lift extends Thread {
     }
 
     public void addEvent(Event event) {
-        events.add(event);
+        events.addLast(event);
     }
 
     public int getCurFloor() {
@@ -188,7 +205,7 @@ public class Lift extends Thread {
         return events;
     }
 
-    public void setEvents(Queue<Event> events) {
+    public void setEvents(ArrayDeque<Event> events) {
         this.events = events;
     }
 }
